@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silted Industree | Wear the Underground</title>
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="Silted Industree: Streetwear independiente con ADN rock, surf y cultura urbana. Ropa para los que no piden permiso.">
+    <meta property="og:title" content="Silted Industree | Wear the Underground">
+    <meta property="og:description" content="Streetwear independiente con ADN rock, surf y cultura urbana.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=1200">
+    <meta property="og:url" content="https://siltedindustree.com">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@700;900&display=swap" rel="stylesheet">
+    
+    <!-- Scripts & Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#0A0A0A',
+                            surface: '#111111',
+                            accent: '#E8FF00',
+                            text: '#F5F5F5',
+                            secondary: '#888888',
+                            border: '#222222',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        :root {
+            --bg: #F1E8E8;
+            --surface: #FFFFFF;
+            --accent: #E8FF00;
+            --ink: #000000;
+            --secondary: #555555;
+            --border: #000000;
+            --f-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--ink);
+            font-family: var(--f-sans);
+            margin: 0;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 0.9;
+        }
+
+        .headline {
+            font-size: clamp(3.5rem, 8vw, 82px);
+            letter-spacing: -4px;
+            margin-bottom: 20px;
+            color: var(--ink);
+        }
+
+        .subheadline {
+            font-size: 16px;
+            color: var(--secondary);
+            line-height: 1.5;
+            max-width: 400px;
+        }
+
+        .badge-yellow {
+            background: var(--accent);
+            color: #000;
+            padding: 4px 8px;
+            font-weight: 900;
+            font-size: 10px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 20px;
+            width: fit-content;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: #000;
+            padding: 18px 40px;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 2px solid var(--border);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 6px 6px 0px #000;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--border);
+            color: var(--ink);
+            padding: 18px 40px;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.3s, color 0.3s;
+        }
+        .btn-outline:hover {
+            background-color: var(--ink);
+            color: var(--bg);
+        }
+        
+        /* Layout Patterns */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+        @media (min-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr 400px;
+                height: calc(100vh - 60px);
+                overflow: hidden;
+            }
+            .hero-pane {
+                padding: 60px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                border-right: 2px solid var(--border);
+                overflow-y: auto;
+                background-color: var(--bg);
+            }
+            .catalog-pane {
+                background: var(--surface);
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                overflow-y: auto;
+            }
+        }
+
+        .nav-bar {
+            height: 60px;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            background: var(--bg);
+            z-index: 50;
+        }
+
+        .footer-strip {
+            border-top: 2px solid var(--border);
+            display: grid;
+            grid-template-columns: 1fr;
+            background: var(--bg);
+            z-index: 20;
+        }
+        @media (min-width: 768px) {
+            .footer-strip {
+                grid-template-columns: 1fr 1fr 1fr;
+                height: 120px;
+            }
+        }
+
+        .footer-sec {
+            padding: 20px 30px;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        @media (min-width: 768px) {
+            .footer-sec {
+                border-bottom: none;
+                border-right: 2px solid var(--border);
+            }
+        }
+        
+        /* Grain Texture */
+        .grain {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        /* Micro-interactions */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Product Card */
+        .product-card {
+            border-bottom: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: background 0.3s;
+            text-decoration: none;
+            color: inherit;
+            background-color: var(--surface);
+        }
+        .product-card:hover {
+            background: #fff;
+            box-shadow: inset 0 0 0 2px var(--border);
+        }
+        
+        .product-name {
+            font-weight: 900;
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            color: var(--ink);
+        }
+        .product-price {
+            color: var(--ink);
+            font-weight: 900;
+            font-size: 16px;
+        }
+        
+        #mwa-toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: #000;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 0px;
+            font-size: 14px;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 99999;
+            border: 1px solid var(--accent);
+        }
+        #mwa-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Forms */
+        .email-input {
+            background: transparent;
+            border: 2px solid var(--border);
+            padding: 10px;
+            color: var(--ink);
+            font-size: 12px;
+            flex: 1;
+            font-weight: bold;
+        }
+        .join-btn {
+            background: var(--border);
+            color: var(--bg);
+            border: none;
+            padding: 10px 20px;
+            font-weight: 900;
+            font-size: 12px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body x-data="{ mobileMenu: false }">
+    <div class="app-container h-screen w-full flex flex-col relative overflow-hidden">
+        <div class="grain"></div>
+
+    <!-- Header -->
+    <nav class="nav-bar relative">
+        <a href="/" class="nav-logo">SILTED INDUSTREE</a>
+        
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex nav-links gap-6">
+            <a href="https://siltedindustree.com/collections/all" class="hover:text-brand-accent transition-colors">Colección</a>
+            <a href="https://siltedindustree.com/pages/contact" class="hover:text-brand-accent transition-colors">Contacto</a>
+            <a href="https://www.instagram.com/industree.store/" target="_blank" class="hover:text-brand-accent transition-colors">Instagram</a>
+        </div>
+        
+        <button @click="mobileMenu = !mobileMenu" class="md:hidden text-brand-text">
+            <svg x-show="!mobileMenu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            <svg x-show="mobileMenu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenu" x-transition class="fixed inset-0 top-[60px] z-[100] md:hidden bg-brand-bg p-6 h-screen">
+            <ul class="space-y-6 text-2xl font-heading font-black uppercase">
+                <li><a @click="mobileMenu = false" href="https://siltedindustree.com/collections/all" class="block">Colección</a></li>
+                <li><a @click="mobileMenu = false" href="https://siltedindustree.com/pages/contact" class="block">Contacto</a></li>
+                <li><a @click="mobileMenu = false" href="https://www.instagram.com/industree.store/" class="block">Instagram</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-grid flex-1 overflow-y-auto lg:overflow-hidden">
+        <!-- LEFT PANE: NARRATIVE -->
+        <div class="hero-pane overflow-y-auto">
+            <!-- HERO -->
+            <section class="py-20 flex flex-col justify-center relative">
+                <div class="reveal">
+                    <div class="badge-yellow">Anti-Mainstream Wear</div>
+                    <h1 class="headline">WEAR THE<br><span class="text-brand-accent">UNDERGROUND.</span></h1>
+                    <p class="subheadline mb-12">Streetwear para los que no piden permiso. Diseño independiente sin corporativos detrás.</p>
+                    <a href="https://siltedindustree.com/collections/all" class="btn-primary">EXPLORAR COLECCIÓN</a>
+                </div>
+                
+                <div style="margin-top:60px; font-size:11px; color:var(--secondary); text-transform:uppercase; letter-spacing:2px;" class="reveal delay-100">
+                    Established 2026 / Zero Fucks Given
+                </div>
+            </section>
+
+            <!-- PROBLEMA -->
+            <section class="py-32 border-t border-brand-border">
+                <div class="reveal">
+                    <h2 class="text-4xl lg:text-6xl mb-8">La moda de masas te aburre.<br>Nosotros también.</h2>
+                    <p class="text-brand-secondary text-lg leading-relaxed max-w-md">
+                        Silted Industree es el refugio para los que rechazan la uniformidad estéril. Si buscas aprobación social, estás en el lugar equivocado.
+                    </p>
+                </div>
+            </section>
+
+            <!-- SOLUCIÓN -->
+            <section class="py-32 border-t border-brand-border bg-brand-surface/30 px-4 md:px-0">
+                <div class="reveal">
+                    <h2 class="text-3xl lg:text-5xl mb-16">Piezas que hablan por ti.</h2>
+                    <div class="space-y-12">
+                        <div class="flex gap-6">
+                            <div class="text-brand-accent shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl mb-2 font-black uppercase">Diseño independiente</h3>
+                                <p class="text-brand-secondary text-sm">Sin corporativos dictando lo que eres. Brutalismo visual y actitud cruda.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div class="text-brand-accent shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl mb-2 font-black uppercase">Ediciones limitadas</h3>
+                                <p class="text-brand-secondary text-sm">No te cruzarás con tu vecino. Tiradas cortas para exclusividad real.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SOCIAL PROOF -->
+            <section class="py-32 border-t border-brand-border px-4 md:px-0">
+                <div class="reveal">
+                    <h2 class="text-3xl lg:text-5xl mb-16 uppercase font-black">La Comunidad</h2>
+                    <div class="space-y-8">
+                        <div class="p-6 border border-brand-border bg-brand-surface/20">
+                            <p class="text-sm italic mb-4">"La Brooklyn Jacket es una puta obra de arte. El fit es perfecto y no pesa nada. Se siente premium pero gritando calle."</p>
+                            <div class="font-black text-brand-accent text-xs">@marco_raw_99</div>
+                        </div>
+                        <div class="p-6 border border-brand-border bg-brand-surface/20">
+                            <p class="text-sm italic mb-4">"Llevaba tiempo buscando una marca que no pareciera un clon de Inditex. Silted es crudo, real. Mi t-shirt favorita es ahora la de Pizza."</p>
+                            <div class="font-black text-brand-accent text-xs">@surf_brat_berlin</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA FINAL -->
+            <section class="py-32 border-t border-brand-border text-center">
+                <div class="reveal">
+                    <h2 class="text-4xl mb-12 font-black uppercase">¿SIGUES AQUÍ?</h2>
+                    <a href="https://siltedindustree.com/collections/all" class="text-xl font-heading font-black underline decoration-brand-accent underline-offset-8 hover:text-brand-accent transition-colors uppercase">VER TODA LA COLECCIÓN</a>
+                </div>
+            </section>
+        </div>
+
+        <!-- RIGHT PANE: CATALOG -->
+        <div class="catalog-pane overflow-y-auto overflow-x-hidden min-h-[400px] relative" 
+             x-data="{ 
+                products: [], 
+                allProducts: [
+                    { name: 'Brooklyn Jacket Black', price: '€150', url: 'https://siltedindustree.com/products/brooklyn-ripstop', img: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=600' },
+                    { name: 'Atlanta Shirt Logo', price: '€119', url: 'https://siltedindustree.com/products/miami-shirt-zip', img: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=600' },
+                    { name: 'Brooklyn Jacket Camo', price: '€150', url: 'https://siltedindustree.com/products/sedated-shirt-copia-1', img: 'https://images.unsplash.com/photo-1544923246-77307dd654ca?q=80&w=600' },
+                    { name: 'Hector Jeans', price: '€110', url: 'https://siltedindustree.com/products/pizza-guy', img: 'https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=600' },
+                    { name: 'Long Sleeve Palm', price: '€70', url: 'https://siltedindustree.com/products/rodeo-ls', img: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=600' },
+                    { name: 'Vest Palm Black', price: '€99', url: 'https://siltedindustree.com/products/vest-green-copia', img: 'https://images.unsplash.com/photo-1614975058789-41316d0e2e9c?q=80&w=600' },
+                    { name: 'R n R Sex & Pizza', price: '€39', url: 'https://siltedindustree.com/products/silted-shirt', img: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=600' },
+                    { name: 'Nel Fiore T-shirt', price: '€39', url: 'https://siltedindustree.com/products/nel-fiore-t-shirt', img: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=600' },
+                    { name: 'Brooklyn Jacket Denim', price: '€150', url: 'https://siltedindustree.com/products/sucks-hoodie-copia', img: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=600' },
+                    { name: 'Atlanta Pants', price: '€89', url: '#', img: 'https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=600' },
+                    { name: 'Palm Bucket Hat', price: '€45', url: '#', img: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=600' },
+                    { name: 'Streetwise Hoodie', price: '€95', url: '#', img: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=600' }
+                ],
+                page: 1,
+                perPage: 4,
+                loading: false,
+                get totalPages() { return Math.ceil(this.allProducts.length / this.perPage) },
+                async fetchProducts() {
+                    this.loading = true;
+                    // Simulating API latency
+                    await new Promise(resolve => setTimeout(resolve, 800));
+                    const start = (this.page - 1) * this.perPage;
+                    this.products = this.allProducts.slice(start, start + this.perPage);
+                    this.loading = false;
+                    // Trigger reveal observation for new items
+                    this.$nextTick(() => {
+                        document.querySelectorAll('.catalog-pane .reveal').forEach(el => observer.observe(el));
+                    });
+                },
+                nextPage() {
+                    if (this.page < this.totalPages) {
+                        this.page++;
+                        this.fetchProducts();
+                    }
+                },
+                prevPage() {
+                    if (this.page > 1) {
+                        this.page--;
+                        this.fetchProducts();
+                    }
+                }
+             }"
+             x-init="fetchProducts()">
+            
+            <!-- Loading Indicator -->
+            <div x-show="loading" class="absolute inset-0 bg-brand-bg/50 backdrop-blur-sm z-30 flex items-center justify-center" x-transition>
+                <div class="w-12 h-12 border-4 border-brand-accent border-t-transparent rounded-full animate-spin"></div>
+            </div>
+
+            <!-- Grid Items -->
+            <template x-for="(product, index) in products" :key="product.name">
+                <a :href="product.url === '#' ? '#' : product.url" 
+                   @click="product.url === '#' ? showPending($event) : null"
+                   class="product-card reveal group"
+                   :class="'delay-' + (index * 75)">
+                    <div class="aspect-square mb-4 overflow-hidden bg-[#1a1a1a]">
+                        <img :src="product.img" 
+                             class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" 
+                             :alt="product.name">
+                    </div>
+                    <div>
+                        <div class="product-name" x-text="product.name"></div>
+                        <div class="product-price" x-text="product.price"></div>
+                    </div>
+                </a>
+            </template>
+
+            <!-- Pagination Controls -->
+            <div class="col-span-2 p-8 border-t border-brand-border flex items-center justify-between bg-brand-bg/50 sticky bottom-0 backdrop-blur-md z-20">
+                <button @click="prevPage()" 
+                        :disabled="page === 1"
+                        class="text-xs font-black uppercase tracking-widest disabled:opacity-30 hover:text-brand-accent transition-colors">
+                    &larr; Prev
+                </button>
+                <div class="text-[10px] font-black uppercase tracking-tighter text-brand-secondary">
+                    Página <span x-text="page" class="text-brand-text"></span> de <span x-text="totalPages"></span>
+                </div>
+                <button @click="nextPage()" 
+                        :disabled="page === totalPages"
+                        class="text-xs font-black uppercase tracking-widest disabled:opacity-30 hover:text-brand-accent transition-colors">
+                    Next &rarr;
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer-strip">
+        <div class="footer-sec bg-brand-accent text-brand-bg">
+            <span class="footer-title !text-brand-bg opacity-70">Newsletter</span>
+            <form class="flex gap-2" onsubmit="showPending(event)">
+                <input type="text" placeholder="Email para el círculo..." class="email-input !border-brand-bg !text-brand-bg placeholder:text-brand-bg/50 focus:outline-none">
+                <button class="join-btn !bg-brand-bg !text-brand-accent uppercase font-black">UNIRME</button>
+            </form>
+        </div>
+        <div class="footer-sec">
+            <span class="footer-title">Comunidad</span>
+            <p class="text-[12px] font-bold uppercase tracking-widest text-brand-secondary">Est. 2026 / Silted Industree</p>
+            <p class="text-[10px] mt-1 text-brand-secondary">@industree.store</p>
+        </div>
+        <div class="footer-sec border-r-0">
+            <span class="footer-title">Legal</span>
+            <div class="flex gap-4 text-[11px] font-bold uppercase tracking-wider">
+                <a href="https://siltedindustree.com/policies/privacy-policy" class="hover:text-brand-accent transition-colors">Privacy</a>
+                <a href="#" onclick="showPending(event)" class="hover:text-brand-accent transition-colors">Términos</a>
+                <span class="text-[#444]">© 2026 SILTED</span>
+            </div>
+        </div>
+    </footer>
+</div>
+
+    <!-- Toast System -->
+    <div id="mwa-toast">📄 Documento en proceso de redacción para el cliente</div>
+
+    <script>
+        // Intersection Observer for Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Toast functionality
+        function showPending(e) {
+            if (e) e.preventDefault();
+            const t = document.getElementById('mwa-toast');
+            t.classList.add('show');
+            clearTimeout(t._timer);
+            t._timer = setTimeout(() => t.classList.remove('show'), 3500);
+        }
+    </script>
+</body>
+</html>
